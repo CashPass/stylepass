@@ -1,0 +1,66 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-nativestorage": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "com.dbaq.cordova.contactsPhoneNumbers": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-sms-plugin": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-http": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-facebook4": {
+            "APP_ID": "122542964988284",
+            "APP_NAME": "StylePass",
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "com.instabug.cordova.plugin": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        },
+        "cordova-plugin-multidex": {
+            "PACKAGE_NAME": "com.tribechoice.stylepass"
+        }
+    }
+}
