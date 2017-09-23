@@ -14649,6 +14649,7 @@ function transition$$1(stateChangeExpr, steps) {
  * | `popoverEnter`           | `string`            | The name of the transition to use while a popover is presented.                                                                                  |
  * | `popoverLeave`           | `string`            | The name of the transition to use while a popover is dismissed.                                                                                  |
  * | `spinner`                | `string`            | The default spinner to use when a name is not defined.                                                                                           |
+ * | `statusbarPadding`       | `boolean`           | Whether to hide extra padding for statusbar.                                                                                                     |
  * | `swipeBackEnabled`       | `boolean`           | Whether native iOS swipe to go back functionality is enabled.                                                                                    |
  * | `tabsHighlight`          | `boolean`           | Whether to show a highlight line under the tab when it is selected.                                                                              |
  * | `tabsLayout`             | `string`            | The layout to use for all tabs. Available options: `"icon-top"`, `"icon-start"`, `"icon-end"`, `"icon-bottom"`, `"icon-hide"`, `"title-hide"`.   |
@@ -15327,7 +15328,7 @@ function requestIonicCallback(functionToLazy) {
  *
  * \@Component({...})
  * export MyPage {
- *   constructor(public plt: Platform) {
+ *   constructor(public platform: Platform) {
  *
  *   }
  * }
@@ -15442,8 +15443,8 @@ var Platform = (function () {
      *
      * \@Component({...})
      * export MyPage {
-     *   constructor(public plt: Platform) {
-     *     if (this.plt.is('ios')) {
+     *   constructor(public platform: Platform) {
+     *     if (this.platform.is('ios')) {
      *       // This will only print when on iOS
      *       console.log('I am an iOS device!');
      *     }
@@ -15482,9 +15483,9 @@ var Platform = (function () {
      *
      * \@Component({...})
      * export MyPage {
-     *   constructor(public plt: Platform) {
+     *   constructor(public platform: Platform) {
      *     // This will print an array of the current platforms
-     *     console.log(this.plt.platforms());
+     *     console.log(this.platform.platforms());
      *   }
      * }
      * ```
@@ -15503,10 +15504,10 @@ var Platform = (function () {
      *
      * \@Component({...})
      * export MyPage {
-     *   constructor(public plt: Platform) {
+     *   constructor(public platform: Platform) {
      *     // This will print an object containing
      *     // all of the platforms and their versions
-     *     console.log(plt.versions());
+     *     console.log(platform.versions());
      *   }
      * }
      * ```
@@ -15549,8 +15550,8 @@ var Platform = (function () {
      *
      * \@Component({...})
      * export MyApp {
-     *   constructor(public plt: Platform) {
-     *     this.plt.ready().then((readySource) => {
+     *   constructor(public platform: Platform) {
+     *     this.platform.ready().then((readySource) => {
      *       console.log('Platform ready from', readySource);
      *       // Platform now ready, execute any required native code
      *     });
@@ -20493,6 +20494,8 @@ var /** @type {?} */ CLS = {
  *
  * \@usage
  * ```ts
+ * import { NavParams } from 'ionic-angular';
+ *
  * export class MyClass{
  *  constructor(public navParams: NavParams){
  *    // userParams is an object we have in our nav-parameters
@@ -20519,6 +20522,8 @@ var NavParams = (function () {
      * Get the value of a nav-parameter for the current view
      *
      * ```ts
+     * import { NavParams } from 'ionic-angular';
+     *
      * export class MyClass{
      *  constructor(public navParams: NavParams){
      *    // userParams is an object we have in our nav-parameters
@@ -20971,7 +20976,7 @@ var DeepLinker = (function () {
      */
     DeepLinker.prototype._loadViewForSegment = function (navContainer, segment, done) {
         if (!segment) {
-            return done();
+            return done(false, false);
         }
         if (Object(__WEBPACK_IMPORTED_MODULE_0__nav_util__["m" /* isTabs */])(navContainer) || (Object(__WEBPACK_IMPORTED_MODULE_0__nav_util__["l" /* isTab */])(navContainer) && navContainer.parent)) {
             var /** @type {?} */ tabs = (((Object(__WEBPACK_IMPORTED_MODULE_0__nav_util__["m" /* isTabs */])(navContainer) ? navContainer : navContainer.parent)));
@@ -20983,7 +20988,7 @@ var DeepLinker = (function () {
                 updateUrl: false,
                 animate: false
             }, true);
-            return done();
+            return done(false, false);
         }
         var /** @type {?} */ navController = ((navContainer));
         var /** @type {?} */ numViews = navController.length() - 1;
@@ -20997,7 +21002,7 @@ var DeepLinker = (function () {
                 if (i === numViews) {
                     // this is the last view in the stack and it's the same
                     // as the segment so there's no change needed
-                    return done();
+                    return done(false, false);
                 }
                 else {
                     // it's not the exact view as the end
@@ -21005,7 +21010,7 @@ var DeepLinker = (function () {
                     return navController.popTo(viewController, {
                         animate: false,
                         updateUrl: false,
-                    }, {}, done);
+                    }, done);
                 }
             }
         }
@@ -27939,7 +27944,7 @@ function EventEmitterProxy_tsickle_Closure_declarations() {
  * The Content component provides an easy to use content area with
  * some useful methods to control the scrollable area. There should
  * only be one content in a single view component. If additional scrollable
- * elements are need, use [ionScroll](../../scroll/Scroll).
+ * elements are needed, use [ionScroll](../../scroll/Scroll).
  *
  *
  * The content area can also implement pull-to-refresh with the
@@ -29743,12 +29748,11 @@ var NavController = (function () {
      *
      * @abstract
      * @param {?} page
-     * @param {?=} params
      * @param {?=} opts
      * @param {?=} done
      * @return {?}
      */
-    NavController.prototype.popTo = function (page, params, opts, done) { };
+    NavController.prototype.popTo = function (page, opts, done) { };
     /**
      * @hidden
      * Pop sequently all the pages in the stack.
@@ -45530,8 +45534,10 @@ function destroyLoop(s) {
     Object(__WEBPACK_IMPORTED_MODULE_0__swiper_utils__["c" /* eachChild */])(s._wrapper, '.' + __WEBPACK_IMPORTED_MODULE_0__swiper_utils__["a" /* CLS */].slide + '.' + __WEBPACK_IMPORTED_MODULE_0__swiper_utils__["a" /* CLS */].slideDuplicate, function (ele) {
         ele.parentElement.removeChild(ele);
     });
-    for (var /** @type {?} */ i = 0; i < s._slides.length; i++) {
-        s._slides[i].removeAttribute('data-swiper-slide-index');
+    if (s._slides) {
+        for (var /** @type {?} */ i = 0; i < s._slides.length; i++) {
+            s._slides[i].removeAttribute('data-swiper-slide-index');
+        }
     }
 }
 /**
@@ -51244,8 +51250,8 @@ function NavPop_tsickle_Closure_declarations() {
  *   template: `<button ion-button [navPush]="pushPage" [navParams]="params">Go</button>`
  * })
  * class MyPage {
- *   params: Object;
  *   pushPage: any;
+ *   params: Object;
  *   constructor(){
  *     this.pushPage = LoginPage;
  *     this.params = { id: 42 };
@@ -56126,11 +56132,12 @@ var Tabs = (function (_super) {
         return '';
     };
     /**
-     * @param {?} secondaryId
+     * @param {?=} secondaryId
      * @param {?=} fallbackIndex
      * @return {?}
      */
     Tabs.prototype._getSelectedTabIndex = function (secondaryId, fallbackIndex) {
+        if (secondaryId === void 0) { secondaryId = ''; }
         if (fallbackIndex === void 0) { fallbackIndex = 0; }
         // we found a segment which probably represents which tab to select
         var /** @type {?} */ indexMatch = secondaryId.match(/tab-(\d+)/);
@@ -59423,6 +59430,8 @@ var __extends = (this && this.__extends) || (function () {
  * to serialize and pass within JSON objects, and sending databases a standardized
  * format which it can be easily parsed if need be.
  *
+ * To create an ISO datetime string for the current date and time, e.g. use `const currentDate = (new Date()).toISOString();`.
+ *
  * An ISO format can be used as a simple year, or just the hour and minute, or get more
  * detailed down to the millisecond and timezone. Any of the ISO formats below can be used,
  * and after a user selects a new value, Ionic will continue to use the same ISO format
@@ -59455,7 +59464,7 @@ var __extends = (this && this.__extends) || (function () {
  * ## Min and Max Datetimes
  *
  * Dates are infinite in either direction, so for a user's selection there should be at
- * least some form of restricting the dates that can be selected. Be default, the maximum
+ * least some form of restricting the dates that can be selected. By default, the maximum
  * date is to the end of the current year, and the minimum date is from the beginning
  * of the year that was 100 years ago.
  *
@@ -62065,11 +62074,11 @@ var TextInput = (function (_super) {
         _this._useAssist = false;
         _this._relocated = false;
         /**
-         * \@input {string} Instructional text that shows before the input has a value.
+         * \@input {string} Set the input's autocomplete property. Values: `"on"`, `"off"`. Default `"off"`.
          */
         _this.autocomplete = '';
         /**
-         * \@input {string} Instructional text that shows before the input has a value.
+         * \@input {string} Set the input's autocorrect property. Values: `"on"`, `"off"`. Default `"off"`.
          */
         _this.autocorrect = '';
         /**
@@ -62678,12 +62687,12 @@ function TextInput_tsickle_Closure_declarations() {
      */
     TextInput.prototype._native;
     /**
-     * \@input {string} Instructional text that shows before the input has a value.
+     * \@input {string} Set the input's autocomplete property. Values: `"on"`, `"off"`. Default `"off"`.
      * @type {?}
      */
     TextInput.prototype.autocomplete;
     /**
-     * \@input {string} Instructional text that shows before the input has a value.
+     * \@input {string} Set the input's autocorrect property. Values: `"on"`, `"off"`. Default `"off"`.
      * @type {?}
      */
     TextInput.prototype.autocorrect;
@@ -65510,7 +65519,7 @@ function loadPrecompiledFactory(modulePath, ngModuleExport) {
  *
  * When a modal (or any other overlay such as an alert or actionsheet) is
  * "presented" to a nav controller, the overlay is added to the app's root nav.
- * After the modal has been presented, from within the component instance The
+ * After the modal has been presented, from within the component instance, the
  * modal can later be closed or "dismissed" by using the ViewController's
  * `dismiss` method. Additionally, you can dismiss any overlay by using `pop`
  * on the root nav controller. Modals are not reusable. When a modal is dismissed
@@ -65601,6 +65610,25 @@ function loadPrecompiledFactory(modulePath, ngModuleExport) {
  *    this.viewCtrl.dismiss(data);
  *  }
  *
+ * }
+ * ```
+ *
+ * A common issue is that a developer may try to implement navigation in a modal, but when you try NavController.push(),
+ * you will notice that the status bar on iOS gets cut off. The proper way to implement navigation in a modal is to
+ * make the modal component a navigation container, and set the root page to the page you want to show in your modal.
+ *
+ * ```ts
+ * \@Component({
+ *   template: '<ion-nav [root]="rootPage" [rootParams]="rootParams"></ion-nav>'
+ * })
+ * export class MyModalWrapper {
+ *   rootPage = 'MyModalContentPage'; // This is the page you want your modal to display
+ *   rootParams;
+ *
+ *   constructor(navParams: NavParams, private viewCtrl: ViewController) {
+ *       this.rootParams = Object.assign({}, navParams.data, {viewCtrl: viewCtrl});
+ *       // This line will send the view controller into your child views, so you can dismiss the modals from there.
+ *   }
  * }
  * ```
  * \@demo /docs/demos/src/modal/
@@ -70424,7 +70452,10 @@ var Tab = (function (_super) {
                     if (i === numViews) {
                         // this is the last view in the stack and it's the same
                         // as the segment so there's no change needed
-                        return done();
+                        if (done) {
+                            done(false, false);
+                        }
+                        return;
                     }
                     else {
                         // it's not the exact view as the end
@@ -70448,7 +70479,10 @@ var Tab = (function (_super) {
             this._dom.read(function () {
                 _this.resize();
             });
-            return done();
+            if (done) {
+                done(false, false);
+            }
+            return;
         }
     };
     /**
@@ -71535,7 +71569,7 @@ var __extends = (this && this.__extends) || (function () {
  * \@name Header
  * \@description
  * Header is a parent component that holds the navbar and toolbar component.
- * It's important to note that `ion-header` needs to be the one of the three root elements of a page
+ * It's important to note that `ion-header` needs to be one of the three root elements of a page
  *
  * \@usage
  *
