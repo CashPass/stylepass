@@ -1,32 +1,60 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="com.tribechoice.stylepass" version="2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>StylePass</name>
+    <description>Style the way you want.</description>
+    <author email="info@cashpass.me" href="https://www.stylepass.co/">TribeChoice</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
+    <allow-navigation href="http://10.0.0.66:8100" />
+    <allow-navigation href="https://cdn.plaid.com/*" />
+    <allow-navigation href="http://cdn.plaid.com/*" />
+    <allow-navigation href="http://192.168.86.195:8100" />
+    <allow-navigation href="http://192.168.86.218:8100" />
+    <allow-navigation href="http://192.168.86.21:8100" />
+    <allow-navigation href="http://192.168.86.200:8100" />
+    <allow-navigation href="http://192.168.86.221:8100" />
+    <allow-navigation href="http://192.168.86.25:8100" />
+    <allow-navigation href="http://192.168.11.2:8100" />
+    <allow-navigation href="http://192.168.86.227:8100" />
+    <allow-navigation href="http://172.31.98.135:8100" />
+    <allow-navigation href="http://192.168.86.204:8100" />
+    <allow-navigation href="http://192.168.86.226:8100" />
+    <allow-navigation href="http://192.168.86.244:8100" />
+    <allow-navigation href="http://192.168.86.30:8100" />
+    <allow-navigation href="http://192.168.86.247:8100" />
+    <allow-navigation href="http://192.168.86.243:8100" />
+    <allow-navigation href="http://192.168.86.250:8100" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="loadUrlTimeoutValue" value="700000" />
+    <preference name="ParseAppId" value="Is6G3tCS4kkbZpL4v2zjWz6F3jOLea99BT1nDMrU" />
+    <preference name="ParseServerUrl" value="https://cashpass.me/passingcash" />
+    <preference name="ParseGcmSenderId" value="165781718909" />
+    <preference name="ParseMultiNotifications" value="true" />
+    <preference name="ParseAutoRegistration" value="true" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
-
-    <!--
-      Change these to configure how the splashscreen displays and fades in/out.
-      More info here: https://github.com/apache/cordova-plugin-splashscreen
-    -->
-    <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <feature name="StatusBar">
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
+    <feature name="CDVWKWebViewEngine">
+        <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -83,9 +111,26 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
+    <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
-    <plugin name="cordova-plugin-whitelist" spec="1.3.1" />
-    <plugin name="cordova-plugin-statusbar" spec="2.2.2" />
-    <plugin name="cordova-plugin-device" spec="1.1.4" />
-    <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
+    <plugin name="cordova-plugin-whitelist" spec="~1.3.2" />
+    <plugin name="cordova-plugin-console" spec="~1.0.7" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.2.3" />
+    <plugin name="cordova-plugin-device" spec="~1.1.6" />
+    <plugin name="cordova-plugin-splashscreen" spec="~4.0.3" />
+    <plugin name="cordova-plugin-nativestorage" spec="~2.2.2" />
+    <plugin name="com.dbaq.cordova.contactsPhoneNumbers" spec="https://github.com/dbaq/cordova-plugin-contacts-phone-numbers.git" />
+    <plugin name="cordova-sms-plugin" spec="~0.1.11" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
+    <plugin name="cordova-sqlite-storage" spec="~2.0.4" />
+    <plugin name="cordova-plugin-http" spec="~1.2.0" />
+    <plugin name="cordova-plugin-file" spec="~4.3.3" />
+    <plugin name="cordova-plugin-compat" spec="~1.1.0" />
+    <plugin name="cordova-plugin-facebook4" spec="1.9.1">
+        <variable name="APP_ID" value="122542964988284" />
+        <variable name="APP_NAME" value="StylePass" />
+    </plugin>
+    <plugin name="com.instabug.cordova.plugin" spec="https://github.com/Instabug/instabug-cordova" />
+    <engine name="ios" spec="~4.3.1" />
+    <engine name="android" spec="~6.1.2" />
 </widget>
